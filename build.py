@@ -1,11 +1,15 @@
 import shutil
 from pathlib import Path
 
+ROOT = Path(__file__).parent
 
-def build():
-    src = Path("src")
-    dist = Path("dist")
-    if dist.exists():
+
+def build(src: Path = None, dist: Path = None):
+    if src is None:
+        src = ROOT / "src"
+    if dist is None:
+        dist = ROOT / "dist"
+    if dist.is_dir():
         shutil.rmtree(dist)
     shutil.copytree(src, dist)
 
