@@ -27,3 +27,13 @@ def test_build_recreates_dist_on_rerun(tmp_path):
 
     assert not (dist / "stale.html").exists()
     assert (dist / "index.html").read_text() == "<h1>New</h1>"
+
+
+def test_build_injects_apps_script_url(tmp_path, monkeypatch):
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "script.js").write_text("const URL = '__APPS_SCRIPT_URL__';")
+    monkeypatch.setenv("APPS_SCRIPT_URL", "https://test.example.com/exec")
+    build(src=src, dist=tmp_path / "dist")
+    assert (tmp_path / "dist" / "script.js").read_text() == \
+        "const URL = 'https://test.example.com/exec';"
