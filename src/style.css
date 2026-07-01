@@ -33,6 +33,7 @@ header img {
   height: 220px;
   border-radius: 18px;
   object-fit: cover;
+  object-position: center 19%;
   margin: 0 auto 1.5rem;
   box-shadow:
     0 0 0 4px var(--gold),

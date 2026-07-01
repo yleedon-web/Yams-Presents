@@ -60,7 +60,7 @@ function renderGift(gift) {
   if (gift.status === 'taken') {
     const badge = document.createElement('span');
     badge.className = 'taken-badge';
-    badge.textContent = 'Taken by ' + (gift.claimed_by || 'someone');
+    badge.textContent = 'Already taken';
     action.appendChild(badge);
   } else {
     const btn = document.createElement('button');
