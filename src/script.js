@@ -51,7 +51,7 @@ function renderGift(gift) {
     img.src = gift.image;
     img.alt = gift.name;
     img.className = 'gift-img';
-    card.insertBefore(img, info);
+    card.appendChild(img);
   }
 
   const action = document.createElement('div');
