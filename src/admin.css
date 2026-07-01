@@ -18,7 +18,7 @@
 }
 
 #login-form button {
-  background: #e63946;
+  background: #4a90d9;
   color: white;
   border: none;
   border-radius: 6px;
@@ -27,7 +27,7 @@
   cursor: pointer;
 }
 
-#login-form button:hover { background: #c1121f; }
+#login-form button:hover { background: #357abd; }
 
 #admin-section {
   max-width: 700px;
@@ -65,7 +65,7 @@
 
 #add-gift-form button {
   align-self: flex-start;
-  background: #2a9d8f;
+  background: #4a90d9;
   color: white;
   border: none;
   border-radius: 6px;
@@ -74,7 +74,7 @@
   cursor: pointer;
 }
 
-#add-gift-form button:hover { background: #21867a; }
+#add-gift-form button:hover { background: #357abd; }
 
 .admin-gift-card {
   background: white;
@@ -92,7 +92,7 @@
 
 .admin-gift-info h3 { font-size: 1rem; margin-bottom: 0.15rem; }
 .admin-gift-info p  { font-size: 0.85rem; color: #666; margin-bottom: 0.15rem; }
-.admin-gift-info a  { font-size: 0.8rem; color: #e63946; }
+.admin-gift-info a  { font-size: 0.8rem; color: #2e7bbf; }
 .admin-gift-info .status { font-size: 0.8rem; color: #888; }
 
 .admin-gift-actions {
