@@ -2,7 +2,10 @@ const API_URL = '__APPS_SCRIPT_URL__';
 
 async function fetchGifts() {
   const res = await fetch(API_URL + '?action=list');
-  return res.json();
+  if (!res.ok) throw new Error('Server error: ' + res.status);
+  const data = await res.json();
+  if (!Array.isArray(data)) throw new Error('Unexpected response from server');
+  return data;
 }
 
 async function claimGift(id, name) {
@@ -37,7 +40,7 @@ function renderGift(gift) {
     link.href = gift.link;
     link.textContent = 'View item';
     link.target = '_blank';
-    link.rel = 'noopener';
+    link.rel = 'noopener noreferrer';
     info.appendChild(link);
   }
 
@@ -49,7 +52,7 @@ function renderGift(gift) {
   if (gift.status === 'taken') {
     const badge = document.createElement('span');
     badge.className = 'taken-badge';
-    badge.textContent = 'Taken by ' + gift.claimed_by;
+    badge.textContent = 'Taken by ' + (gift.claimed_by || 'someone');
     action.appendChild(badge);
   } else {
     const btn = document.createElement('button');
@@ -97,7 +100,16 @@ function showClaimForm(card, id) {
     if (!name) return;
     submit.disabled = true;
     submit.textContent = 'Saving...';
-    await claimGift(id, name);
+    const result = await claimGift(id, name);
+    if (result && result.error) {
+      submit.disabled = false;
+      submit.textContent = 'Confirm';
+      const err = document.createElement('p');
+      err.style.cssText = 'color:#e63946;font-size:0.8rem;margin:0;';
+      err.textContent = 'Could not claim — please try again.';
+      form.appendChild(err);
+      return;
+    }
     loadGifts();
   };
 
