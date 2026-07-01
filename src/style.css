@@ -87,6 +87,14 @@ main {
   opacity: 0.6;
 }
 
+.gift-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
 .gift-info h3 {
   font-size: 1.05rem;
   font-weight: 600;

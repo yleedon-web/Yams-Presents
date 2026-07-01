@@ -46,6 +46,14 @@ function renderGift(gift) {
 
   card.appendChild(info);
 
+  if (gift.image) {
+    const img = document.createElement('img');
+    img.src = gift.image;
+    img.alt = gift.name;
+    img.className = 'gift-img';
+    card.insertBefore(img, info);
+  }
+
   const action = document.createElement('div');
   action.className = 'gift-action';
 

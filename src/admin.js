@@ -33,6 +33,14 @@ function renderAdminGift(gift) {
   const card = document.createElement('div');
   card.className = 'admin-gift-card' + (gift.status === 'taken' ? ' taken' : '');
 
+  if (gift.image) {
+    const img = document.createElement('img');
+    img.src = gift.image;
+    img.alt = gift.name;
+    img.className = 'admin-gift-img';
+    card.appendChild(img);
+  }
+
   const info = document.createElement('div');
   info.className = 'admin-gift-info';
 
@@ -145,13 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = document.getElementById('new-name').value.trim();
     const description = document.getElementById('new-description').value.trim();
     const link = document.getElementById('new-link').value.trim();
+    const image = document.getElementById('new-image').value.trim();
     if (!name) return;
     addError.style.display = 'none';
     const submitBtn = addForm.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Adding...';
     try {
-      const result = await apiPost({action: 'add', name, description, link});
+      const result = await apiPost({action: 'add', name, description, link, image});
       if (result.error) throw new Error(result.error);
       addForm.reset();
       loadAdminGifts();

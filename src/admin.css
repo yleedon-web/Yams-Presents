@@ -90,6 +90,14 @@
 
 .admin-gift-card.taken { opacity: 0.7; }
 
+.admin-gift-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
 .admin-gift-info h3 { font-size: 1rem; margin-bottom: 0.15rem; }
 .admin-gift-info p  { font-size: 0.85rem; color: #666; margin-bottom: 0.15rem; }
 .admin-gift-info a  { font-size: 0.8rem; color: #2e7bbf; }

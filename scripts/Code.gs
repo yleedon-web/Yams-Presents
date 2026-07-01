@@ -8,7 +8,7 @@ function doPost(e) {
   var data = JSON.parse(e.postData.contents);
   if (data.action === 'claim')   return claimGift(data.id, data.name);
   if (data.action === 'unclaim') return unclaimGift(data.id);
-  if (data.action === 'add')     return addGift(data.name, data.description, data.link);
+  if (data.action === 'add')     return addGift(data.name, data.description, data.link, data.image);
   if (data.action === 'delete')  return deleteGift(data.id);
   return json({error: 'unknown action'});
 }
@@ -30,7 +30,8 @@ function rowToGift(row) {
     description: row[2],
     link:        row[3],
     status:      row[4],
-    claimed_by:  row[5]
+    claimed_by:  row[5],
+    image:       row[6]
   };
 }
 
@@ -70,10 +71,10 @@ function unclaimGift(id) {
   return json({error: 'gift not found'});
 }
 
-function addGift(name, description, link) {
+function addGift(name, description, link, image) {
   var sheet = getSheet();
   var newId = Date.now();
-  sheet.appendRow([newId, name, description || '', link || '', 'available', '']);
+  sheet.appendRow([newId, name, description || '', link || '', 'available', '', image || '']);
   return json({success: true, id: newId});
 }
 
