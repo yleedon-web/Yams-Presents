@@ -4,7 +4,7 @@ const API_URL = '__APPS_SCRIPT_URL__';
 async function apiPost(body) {
   const res = await fetch(API_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'text/plain'},
     body: JSON.stringify(body),
   });
   if (!res.ok) throw new Error(`Server error ${res.status}`);

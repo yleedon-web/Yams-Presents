@@ -11,7 +11,7 @@ async function fetchGifts() {
 async function claimGift(id, name) {
   const res = await fetch(API_URL, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'text/plain'},
     body: JSON.stringify({action: 'claim', id, name})
   });
   return res.json();
