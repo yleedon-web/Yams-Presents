@@ -1,68 +1,134 @@
+:root {
+  --midnight: #1b1340;
+  --dusk: #2d2060;
+  --gold: #f0bc2e;
+  --gold-soft: rgba(240, 188, 46, 0.22);
+  --parchment: #faf7f2;
+  --card: #ffffff;
+  --text: #1e1e2e;
+  --muted: #6b6888;
+  --link: #7550c2;
+  --danger: #e63946;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #f0f8ff;
-  color: #333;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background: var(--parchment);
+  color: var(--text);
   min-height: 100vh;
 }
 
 header {
-  background: #4a90d9;
+  background: linear-gradient(160deg, var(--midnight) 0%, var(--dusk) 100%);
   color: white;
-  padding: 2rem 1rem;
+  padding: 3rem 1rem 2.5rem;
   text-align: center;
 }
 
-header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-header p  { opacity: 0.9; font-size: 1rem; }
-
-body > img {
+header img {
   display: block;
-  margin: 1.5rem auto 0;
-  width: 200px;
-  border-radius: 20%;
+  width: 640px;
+  height: 220px;
+  border-radius: 18px;
+  object-fit: cover;
+  margin: 0 auto 1.5rem;
+  box-shadow:
+    0 0 0 4px var(--gold),
+    0 0 0 10px var(--gold-soft),
+    0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+header h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.6rem;
+}
+
+header p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 380px;
+  margin: 0 auto;
+  line-height: 1.65;
 }
 
 main {
-  max-width: 700px;
-  margin: 2rem auto;
+  max-width: 680px;
+  margin: 2.5rem auto;
   padding: 0 1rem;
 }
 
 .gift-card {
-  background: white;
-  border-radius: 10px;
+  background: var(--card);
+  border-radius: 14px;
   padding: 1.25rem 1.5rem;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(27, 19, 64, 0.07);
+  border-left: 3px solid transparent;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
-.gift-card.taken { opacity: 0.6; }
+.gift-card.available { border-left-color: var(--gold); }
+.gift-card.available:hover {
+  box-shadow: 0 4px 24px rgba(27, 19, 64, 0.13);
+  transform: translateY(-1px);
+}
 
-.gift-info h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
-.gift-info p  { font-size: 0.9rem; color: #666; margin-bottom: 0.25rem; }
-.gift-info a  { font-size: 0.85rem; color: #2e7bbf; }
+.gift-card.taken {
+  border-left-color: var(--muted);
+  opacity: 0.6;
+}
+
+.gift-info h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.gift-info p {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+  line-height: 1.55;
+}
+
+.gift-info a {
+  font-size: 0.82rem;
+  color: var(--link);
+  text-decoration: none;
+}
+.gift-info a:hover { text-decoration: underline; }
 
 .gift-action { flex-shrink: 0; }
 
 .claim-btn {
-  background: #4a90d9;
-  color: white;
+  background: var(--gold);
+  color: var(--midnight);
   border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
 }
-.claim-btn:hover { background: #357abd; }
+.claim-btn:hover { background: #d9a91e; transform: scale(1.02); }
 
-.taken-badge { font-size: 0.85rem; color: #888; white-space: nowrap; }
+.taken-badge {
+  font-size: 0.82rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
 
 .claim-form {
   display: flex;
@@ -72,54 +138,70 @@ main {
 }
 
 .name-input {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 0.4rem 0.6rem;
-  font-size: 0.9rem;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.875rem;
+  font-family: inherit;
   width: 160px;
+  outline: none;
+  transition: border-color 0.15s;
 }
+.name-input:focus { border-color: var(--gold); }
 
 .confirm-btn {
-  background: #4a90d9;
-  color: white;
+  background: var(--gold);
+  color: var(--midnight);
   border: none;
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
   font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
   width: 100%;
+  transition: background 0.15s;
 }
-.confirm-btn:hover { background: #357abd; }
+.confirm-btn:hover { background: #d9a91e; }
 
 .cancel-btn {
   background: none;
   border: none;
-  color: #999;
+  color: var(--muted);
   font-size: 0.8rem;
+  font-family: inherit;
   cursor: pointer;
   width: 100%;
   text-align: center;
+  padding: 0.2rem 0;
 }
-.cancel-btn:hover { color: #666; }
+.cancel-btn:hover { color: var(--text); }
 
 .loading, .empty, .error {
   text-align: center;
-  color: #888;
-  padding: 2rem;
+  color: var(--muted);
+  padding: 3rem 1rem;
+  font-size: 0.95rem;
 }
-.error { color: #e63946; }
+.error { color: var(--danger); }
 
 footer {
-  background: #e8f1fb;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   font-size: 0.8rem;
-  color: #777;
-  margin-top: 3rem;
+  color: var(--muted);
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  border-top: 1px solid rgba(27, 19, 64, 0.08);
 }
-footer a { color: #4a90d9; text-decoration: none; }
+footer a { color: var(--link); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gift-card, .claim-btn, .confirm-btn { transition: none; }
+  .gift-card.available:hover { transform: none; }
+  .claim-btn:hover { transform: none; }
+}
