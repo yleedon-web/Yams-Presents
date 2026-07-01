@@ -43,7 +43,6 @@ def test_build_injects_admin_password(tmp_path, monkeypatch):
     src = tmp_path / "src"
     src.mkdir()
     (src / "admin.js").write_text("const PW = '__ADMIN_PASSWORD__';")
-    monkeypatch.setenv("APPS_SCRIPT_URL", "https://test.example.com/exec")
     monkeypatch.setenv("ADMIN_PASSWORD", "testpass")
     build(src=src, dist=tmp_path / "dist")
     assert (tmp_path / "dist" / "admin.js").read_text() == "const PW = 'testpass';"
