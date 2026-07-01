@@ -1,0 +1,10 @@
+[project]
+name = "yams-presents"
+version = "0.1.0"
+description = "Yam's birthday gift registry website"
+requires-python = ">=3.11"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
