@@ -37,3 +37,26 @@ def test_build_injects_apps_script_url(tmp_path, monkeypatch):
     build(src=src, dist=tmp_path / "dist")
     assert (tmp_path / "dist" / "script.js").read_text() == \
         "const URL = 'https://test.example.com/exec';"
+
+
+def test_build_injects_admin_password(tmp_path, monkeypatch):
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "admin.js").write_text("const PW = '__ADMIN_PASSWORD__';")
+    monkeypatch.setenv("APPS_SCRIPT_URL", "https://test.example.com/exec")
+    monkeypatch.setenv("ADMIN_PASSWORD", "testpass")
+    build(src=src, dist=tmp_path / "dist")
+    assert (tmp_path / "dist" / "admin.js").read_text() == "const PW = 'testpass';"
+
+
+def test_build_injects_both_placeholders(tmp_path, monkeypatch):
+    src = tmp_path / "src"
+    src.mkdir()
+    (src / "admin.js").write_text(
+        "const API='__APPS_SCRIPT_URL__'; const PW='__ADMIN_PASSWORD__';"
+    )
+    monkeypatch.setenv("APPS_SCRIPT_URL", "https://test.example.com/exec")
+    monkeypatch.setenv("ADMIN_PASSWORD", "testpass")
+    build(src=src, dist=tmp_path / "dist")
+    assert (tmp_path / "dist" / "admin.js").read_text() == \
+        "const API='https://test.example.com/exec'; const PW='testpass';"
