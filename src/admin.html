@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yam's Presents — Admin</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header>
+    <h1>Yam's Presents — Admin</h1>
+  </header>
+
+  <main>
+    <div id="login-section">
+      <form id="login-form">
+        <input type="password" id="password-input" placeholder="Admin password" required>
+        <button type="submit">Login</button>
+        <p id="login-error" class="error" style="display:none">Incorrect password.</p>
+      </form>
+    </div>
+
+    <div id="admin-section" style="display:none">
+      <section id="add-gift-section">
+        <h2>Add Gift</h2>
+        <form id="add-gift-form">
+          <input type="text" id="new-name" placeholder="Gift name" required>
+          <input type="text" id="new-description" placeholder="Description (optional)">
+          <input type="url" id="new-link" placeholder="Link (optional)">
+          <button type="submit">Add Gift</button>
+          <p id="add-error" class="error" style="display:none"></p>
+        </form>
+      </section>
+
+      <section id="gift-list-section">
+        <h2>All Gifts</h2>
+        <div id="admin-gift-list"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
