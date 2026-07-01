@@ -7,6 +7,7 @@ async function apiPost(body) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(body),
   });
+  if (!res.ok) throw new Error(`Server error ${res.status}`);
   return res.json();
 }
 
@@ -79,7 +80,7 @@ function renderAdminGift(gift) {
     try {
       const result = await apiPost({action: 'delete', id: gift.id});
       if (result.error) throw new Error(result.error);
-      loadAdminGifts();
+      await loadAdminGifts();
     } catch (e) {
       errorEl.textContent = e.message || 'Delete failed.';
       errorEl.style.display = '';
@@ -99,7 +100,7 @@ function renderAdminGift(gift) {
       try {
         const result = await apiPost({action: 'unclaim', id: gift.id});
         if (result.error) throw new Error(result.error);
-        loadAdminGifts();
+        await loadAdminGifts();
       } catch (e) {
         errorEl.textContent = e.message || 'Unclaim failed.';
         errorEl.style.display = '';
